@@ -7,10 +7,12 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/api/dfs", algorithms.HandleDFS)
+	// Register only the API endpoints with CORS
+	http.Handle("/api/dfs", enableCORS(http.HandlerFunc(algorithms.HandleDFS)))
+	http.Handle("/api/bfs", enableCORS(http.HandlerFunc(algorithms.HandleBFS)))
 
 	log.Println("Server starting on :8080")
-	if err := http.ListenAndServe(":8080", enableCORS(http.DefaultServeMux)); err != nil {
+	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
 }
