@@ -1,0 +1,42 @@
+<div class="navigation">
+  <!-- Hamburger Button -->
+  <button 
+    class="hamburger-btn" 
+    (click)="toggleMenu()"
+    [class.open]="isOpen()"
+    aria-label="Toggle menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <!-- Sidebar Menu -->
+  <nav class="sidebar" [class.open]="isOpen()">
+    <div class="sidebar-header">
+      <h2>Graph Algorithms</h2>
+      <button class="close-btn" (click)="closeMenu()" aria-label="Close menu">
+        ×
+      </button>
+    </div>
+
+    <ul class="menu-list">
+      <li *ngFor="let algo of algorithms">
+        <a 
+          [routerLink]="algo.path" 
+          routerLinkActive="active"
+          (click)="closeMenu()"
+          class="menu-item">
+          <span class="menu-label">{{ algo.label }}</span>
+          <span class="menu-description">{{ algo.description }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Overlay -->
+  <div 
+    class="overlay" 
+    [class.visible]="isOpen()" 
+    (click)="closeMenu()">
+  </div>
+</div>

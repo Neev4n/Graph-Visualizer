@@ -1,0 +1,95 @@
+<div class="visualizer-container">
+  <h2>DFS/BFS Graph Visualizer</h2>
+
+  <div class="controls">
+    <button (click)="startDFS(`dfs`)" [disabled]="isRunning()" class="btn btn-primary">
+      {{ isRunning() ? 'Running...' : 'Start DFS' }}
+    </button>
+
+    <button (click)="startDFS(`bfs`)" [disabled]="isRunning()" class="btn btn-primary">
+      {{ isRunning() ? 'Running...' : 'Start BFS' }}
+    </button>
+    <button (click)="resetGraph()" [disabled]="isRunning()" class="btn btn-secondary">
+      Reset
+    </button>
+    <button (click)="randomizeGraph()" [disabled]="isRunning()" class="btn btn-secondary">
+      Randomize Graph
+    </button>
+  </div>
+
+  <svg class="graph-canvas" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+    <!-- Draw edges first (so they appear behind nodes) -->
+
+    <defs>
+      <marker id="arrow"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="8"
+              markerHeight="8"
+              orient="auto"
+              markerUnits="strokeWidth">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#999"></path>
+      </marker>
+
+      <!-- highlighted arrow for "current" edge -->
+      <marker id="arrow-highlight"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="10"
+              markerHeight="10"
+              orient="auto"
+              markerUnits="strokeWidth">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#F57C00"></path>
+      </marker>
+    </defs>
+
+    
+
+    <ng-container *ngFor="let edge of edges()">
+      <line
+        [attr.x1]="lineEndpoints(edge).x1"
+        [attr.y1]="lineEndpoints(edge).y1"
+        [attr.x2]="lineEndpoints(edge).x2"
+        [attr.y2]="lineEndpoints(edge).y2"
+        class="edge"
+        [class.current-edge]="isCurrentEdge(edge)"
+        [attr.marker-end]="isCurrentEdge(edge) ? 'url(#arrow-highlight)' : 'url(#arrow)'" 
+        [attr.marker-start]="isBidirectional(edge) ? (isCurrentEdge(edge) ? 'url(#arrow-highlight)' : 'url(#arrow)') : null"
+      ></line>
+    </ng-container>
+
+    <!-- Draw nodes -->
+    <ng-container *ngFor="let node of nodes()">
+      <g>
+        <circle
+          [attr.cx]="node.x"
+          [attr.cy]="node.y"
+          r="25"
+          [class.visited]="node.visited"
+          [class.current]="node.current"
+          class="node"
+        ></circle>
+        <text [attr.x]="node.x" [attr.y]="node.y + 5" class="node-label">
+          {{ node.id }}
+        </text>
+      </g>
+    </ng-container>
+  </svg>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-circle"></div>
+      <span>Unvisited</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-circle current"></div>
+      <span>Current</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-circle visited"></div>
+      <span>Visited</span>
+    </div>
+  </div>
+</div>

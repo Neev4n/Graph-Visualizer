@@ -15,7 +15,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
   styles: [`
     .app-container {
       min-height: 100vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #696969 0%, #a3a3a3 100%);
       padding: 2rem 0;
     }
   `],
