@@ -34,7 +34,6 @@ func computeBFS(nodes []Node, edges []Edge) []GraphStep {
 
 	for _, edge := range edges {
 		adjacencyList[edge.From] = append(adjacencyList[edge.From], edge.To)
-		adjacencyList[edge.To] = append(adjacencyList[edge.To], edge.From) // Undirected
 	}
 
 	visited := make(map[int]bool)
@@ -51,16 +50,25 @@ func computeBFS(nodes []Node, edges []Edge) []GraphStep {
 
 func bfs(nodeID int, visited map[int]bool, adjacencyList map[int][]int, steps *[]GraphStep) {
 
+	type pair struct {
+		id   int
+		prev int
+	}
+
 	queue := list.New()
 
-	queue.PushBack(nodeID)
+	queue.PushBack(pair{nodeID, -1})
 
 	for queue.Len() > 0 {
 
-		node := queue.Front()
-		queue.Remove(node)
+		elem := queue.Front()
+		queue.Remove(elem)
 
-		nodeID := node.Value.(int)
+		// assert the stored value back to pair
+		item := elem.Value.(pair)
+		nodeID := item.id
+		prevNodeId := item.prev
+
 		visited[nodeID] = true
 
 		// Add step: mark node as current and visited
@@ -68,13 +76,14 @@ func bfs(nodeID int, visited map[int]bool, adjacencyList map[int][]int, steps *[
 			NodeID:  nodeID,
 			Visited: true,
 			Current: true,
+			FromID:  prevNodeId,
 		})
 
 		// Visit all neighbors
 		neighbors := adjacencyList[nodeID]
 		for _, neighborID := range neighbors {
 			if !visited[neighborID] {
-				queue.PushBack(neighborID)
+				queue.PushBack(pair{neighborID, nodeID})
 			}
 		}
 

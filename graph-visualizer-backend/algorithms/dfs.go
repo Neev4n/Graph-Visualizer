@@ -33,7 +33,6 @@ func computeDFS(nodes []Node, edges []Edge) []GraphStep {
 
 	for _, edge := range edges {
 		adjacencyList[edge.From] = append(adjacencyList[edge.From], edge.To)
-		adjacencyList[edge.To] = append(adjacencyList[edge.To], edge.From) // Undirected
 	}
 
 	visited := make(map[int]bool)
