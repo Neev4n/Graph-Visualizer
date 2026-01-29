@@ -7,7 +7,9 @@ A simple yet powerful graph visualization tool that demonstrates common graph tr
 ### Current Features
 
 - **BFS (Breadth-First Search)**: Visualize breadth-first traversal on randomized graphs
+![bfs](https://github.com/user-attachments/assets/9117a322-0ef0-4477-bfb1-eb9e8c14109d)
 - **DFS (Depth-First Search)**: Visualize depth-first traversal on randomized graphs
+![dfs](https://github.com/user-attachments/assets/7b658eb4-fcf0-4a49-816d-a6ca703046d0)
 - **Real-time Visualization**: Watch algorithms execute step-by-step with animated delays
 - **Randomized Graphs**: Generate random graphs for testing and visualization
 
