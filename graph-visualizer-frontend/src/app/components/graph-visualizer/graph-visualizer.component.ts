@@ -13,6 +13,7 @@ interface Node {
 interface Edge {
   from: number;
   to: number;
+  weight: number;
 }
 
 interface DFSStep {

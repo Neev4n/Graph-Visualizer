@@ -9,6 +9,7 @@ export interface GNode {
 export interface GEdge {
   from: number;
   to: number;
+  weight: number;
 }
 
 /**
@@ -29,14 +30,14 @@ export function getRandomGraph(seed?: number, excludeIndex?: number): { nodes: G
         { id: 6, x: 300, y: 200,},
       ],
       edges: [
-        { from: 0, to: 2 },
-        { from: 0, to: 1 },
-        { from: 0, to: 5 },
-        { from: 0, to: 6 },
-        { from: 1, to: 3 },
-        { from: 1, to: 3 },
-        { from: 6, to: 3 },
-        { from: 3, to: 4 },
+        { from: 0, to: 2, weight: 0 },
+        { from: 0, to: 1, weight: 0 },
+        { from: 0, to: 5, weight: 0 },
+        { from: 0, to: 6, weight: 0 },
+        { from: 1, to: 3, weight: 0 },
+        { from: 1, to: 3, weight: 0 },
+        { from: 6, to: 3, weight: 0 },
+        { from: 3, to: 4, weight: 0 },
       ],
     },
 
@@ -51,16 +52,17 @@ export function getRandomGraph(seed?: number, excludeIndex?: number): { nodes: G
         { id: 5, x: 300, y: 200 },
       ],
       edges: [
-        { from: 0, to: 1 },
-        { from: 1, to: 2 },
-        { from: 2, to: 1 }, // two-way between 1 and 2
-        { from: 1, to: 3 },
-        { from: 2, to: 4 },
-        { from: 4, to: 5 },
-        { from: 5, to: 0 }, // cycle back to 0
+        { from: 0, to: 1, weight: 0 },
+        { from: 1, to: 2, weight: 0 },
+        { from: 2, to: 1, weight: 0 }, // two-way between 1 and 2
+        { from: 1, to: 3, weight: 0 },
+        { from: 2, to: 4, weight: 0 },
+        { from: 4, to: 5, weight: 0 },
+        { from: 5, to: 0, weight: 0 }, // cycle back to 0
       ],
     },
   ];
+
 
   const count = graphs.length;
   let idx: number;

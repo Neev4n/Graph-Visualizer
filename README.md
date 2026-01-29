@@ -58,7 +58,7 @@ A simple yet powerful graph visualization tool that demonstrates common graph tr
    Open your browser and navigate to:
 
    ```
-   http://localhost
+   http://localhost:4200
    ```
 
 4. **Stop the application**
