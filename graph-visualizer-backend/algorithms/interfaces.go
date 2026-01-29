@@ -9,8 +9,9 @@ type Node struct {
 }
 
 type Edge struct {
-	From int `json:"from"`
-	To   int `json:"to"`
+	From   int `json:"from"`
+	To     int `json:"to"`
+	Weight int `json:"weight"`
 }
 
 type GraphRequest struct {
@@ -23,6 +24,9 @@ type GraphStep struct {
 	Visited bool `json:"visited"`
 	Current bool `json:"current"`
 	FromID  int  `json:"fromId"`
+}
+
+type DijkstraStep struct {
 }
 
 type GraphResponse struct {
